@@ -4,9 +4,10 @@
 このドキュメントは、`doc/Design.md` に基づき、TODO CLIアプリケーションの実装を段階的に進めるための計画を定義します。
 
 ## 2. 実装ステップ
+本プロジェクトでは、テスト駆動開発（TDD）のアプローチを採用し、各機能の実装前にテストを記述します。
 
 ### ステップ 1: 環境構築 (0.5h)
-- Python仮想環境を構築する (`poetry init` or `python -m venv`)。
+- Python仮想環境を構築する (`poetry init`)。
 - 依存ライブラリ (`typer`, `pydantic`, `pytest`, `pytest-cov`, `mypy`) をインストールする。
 - `pyproject.toml` または `requirements.txt` を設定する。
 - `.gitignore` ファイルを作成する。
