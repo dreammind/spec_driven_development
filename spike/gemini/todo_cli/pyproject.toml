@@ -1,0 +1,24 @@
+[tool.poetry]
+name = "todo-cli"
+version = "0.1.0"
+description = "A simple command-line TODO application."
+authors = ["Your Name <you@example.com>"]
+readme = "README.md"
+packages = [{include = "todo", from = "src"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+typer = {extras = ["all"], version = ">=0.9.0"}
+pydantic = "^2.5.3"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^7.4.3"
+pytest-cov = "^4.1.0"
+mypy = "^1.7.1"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+todo = "todo.main:app"
