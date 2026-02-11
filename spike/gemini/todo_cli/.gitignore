@@ -1,3 +1,4 @@
+
 # Python
 __pycache__/
 *.pyc
@@ -20,5 +21,6 @@ poetry.lock
 .pytest_cache/
 .mypy_cache/
 tasks.json
+dummy_tasks.json
 coverage.xml
 .DS_Store

@@ -4,8 +4,8 @@ from typing import List
 from datetime import date
 
 import pytest
-from src.todo.models import Task
-from src.todo.database import load_tasks, save_tasks
+from todo.models import Task
+from todo.database import load_tasks, save_tasks
 
 @pytest.fixture
 def sample_tasks() -> List[Task]:

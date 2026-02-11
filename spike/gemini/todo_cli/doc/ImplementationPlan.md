@@ -7,7 +7,7 @@
 本プロジェクトでは、テスト駆動開発（TDD）のアプローチを採用し、各機能の実装前にテストを記述します。
 
 ### ステップ 1: 環境構築 (0.5h)
-- Python仮想環境を構築する (`poetry init`)。
+- Python仮想環境を構築する (`uv init`)。
 - 依存ライブラリ (`typer`, `pydantic`, `pytest`, `pytest-cov`, `mypy`) をインストールする。
 - `pyproject.toml` または `requirements.txt` を設定する。
 - `.gitignore` ファイルを作成する。

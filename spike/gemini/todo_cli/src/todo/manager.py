@@ -3,8 +3,8 @@ from pathlib import Path
 from typing import List, Optional, Any
 from operator import attrgetter
 
-from src.todo.models import Task
-from src.todo.database import load_tasks, save_tasks
+from todo.models import Task
+from todo.database import load_tasks, save_tasks
 
 
 class TaskManager:

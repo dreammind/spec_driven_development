@@ -2,7 +2,7 @@ import json
 from pathlib import Path
 from typing import List
 
-from src.todo.models import Task
+from todo.models import Task
 
 DEFAULT_DB_PATH = Path("tasks.json")
 

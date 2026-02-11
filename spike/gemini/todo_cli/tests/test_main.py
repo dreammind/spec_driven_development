@@ -3,8 +3,8 @@ from pathlib import Path
 from typer.testing import CliRunner
 
 import pytest
-from src.todo.main import app, task_manager # Import app and the initialized task_manager
-from src.todo.models import Task
+from todo.main import app, task_manager # Import app and the initialized task_manager
+from todo.models import Task
 
 runner = CliRunner()
 

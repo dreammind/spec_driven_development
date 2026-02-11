@@ -9,7 +9,7 @@
 - **テストフレームワーク**: Pytest (豊富なプラグインとシンプルな記法が特徴)
 - **テストカバレッジ**: pytest-cov
 - **型チェック**: Mypy (型安全性とコード品質の向上のため)
-- **依存関係管理**: Poetry
+- **依存関係管理**: uv
 
 ## 3. プロジェクト構成
 ```
@@ -27,7 +27,7 @@ todo_cli/
 │   ├── test_database.py
 │   └── test_manager.py
 ├── .gitignore
-├── pyproject.toml     # (Poetryを使用する場合)
+├── pyproject.toml     # (uvを使用する場合)
 └── tasks.json         # データストア (初回実行時に自動生成)
 ```
 

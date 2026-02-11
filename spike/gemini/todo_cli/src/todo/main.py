@@ -2,8 +2,8 @@ import typer
 from typing import Optional
 from datetime import datetime, date
 
-from src.todo.manager import TaskManager
-from src.todo.models import Task
+from todo.manager import TaskManager
+from todo.models import Task
 
 app = typer.Typer(help="A simple command-line TODO application.")
 task_manager = TaskManager() # Initialize TaskManager

@@ -7,4 +7,4 @@
 * Gemini CLIのインストール
 * VS Code
 * Gemini CLI Companion拡張
-* Gemini Code Assist
+* Gemini Code Assist 拡張

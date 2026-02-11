@@ -5,8 +5,8 @@ from typing import List, Optional
 from unittest.mock import MagicMock, patch
 
 import pytest
-from src.todo.models import Task
-from src.todo.manager import TaskManager  # This will be created later
+from todo.models import Task
+from todo.manager import TaskManager  # This will be created later
 
 
 @pytest.fixture
@@ -27,7 +27,7 @@ def sample_tasks_data() -> List[dict]:
 def mock_load_tasks(sample_tasks_data: List[dict]):
     """Mocks the database.load_tasks function."""
     # Patch load_tasks where TaskManager imports it from
-    with patch('src.todo.manager.load_tasks') as mock: # Changed patch target
+    with patch('todo.manager.load_tasks') as mock: # Changed patch target
         mock.return_value = [Task.model_validate(data) for data in sample_tasks_data]
         yield mock
 
@@ -35,7 +35,7 @@ def mock_load_tasks(sample_tasks_data: List[dict]):
 def mock_save_tasks():
     """Mocks the database.save_tasks function."""
     # Patch save_tasks where TaskManager imports it from
-    with patch('src.todo.manager.save_tasks') as mock: # Changed patch target
+    with patch('todo.manager.save_tasks') as mock: # Changed patch target
         yield mock
 
 @pytest.fixture

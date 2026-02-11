@@ -1,97 +1,97 @@
-# TODO CLI Application
+# TODO CLI アプリケーション
 
-A simple, robust command-line interface (CLI) for managing your TODO tasks. Built with Python, Typer, and Pydantic.
+TODOタスクを管理するための、シンプルで堅牢なコマンドラインインターフェース（CLI）です。Python、Typer、およびPydanticを使用して構築されています。
 
-## Features
+## 特徴
 
-- **Add Tasks**: Create new tasks with title, priority, due date, and category.
-- **List Tasks**: View your tasks, filtered by category or sorted by priority/due date.
-- **Edit Tasks**: Update existing tasks.
-- **Complete Tasks**: Mark tasks as done.
-- **Delete Tasks**: Remove tasks you no longer need.
-- **Search**: Find tasks by keyword.
-- **Data Persistence**: Tasks are saved to a local JSON file (`tasks.json`).
+- **タスクの追加**: タイトル、優先度、期限、カテゴリを指定して新しいタスクを作成。
+- **タスクの一覧表示**: カテゴリによるフィルタリングや、優先度・期限によるソートが可能。
+- **タスクの編集**: 既存のタスクを更新。
+- **タスクの完了**: タスクを完了状態にマーク。
+- **タスクの削除**: 不要になったタスクを削除。
+- **検索**: キーワードでタスクを検索。
+- **データの永続化**: タスクはローカルのJSONファイル（`tasks.json`）に保存。
 
-## Installation
+## インストール
 
-### Prerequisites
+### 前提条件
 
-- Python 3.10 or higher
-- [Poetry](https://python-poetry.org/) (recommended for dependency management)
+- Python 3.10 以上
+- [uv](https://github.com/astral-sh/uv) (推奨される依存関係管理ツール)
 
-### Setup
+### セットアップ
 
-1. Clone the repository (if applicable) or navigate to the project directory.
+1. リポジトリをクローンするか、プロジェクトディレクトリに移動します。
 
-2. Install dependencies using Poetry:
+2. uv を使用して依存関係をインストールします：
 
    ```bash
-   poetry install
+   uv sync
    ```
 
-## Usage
+## 使い方
 
-You can run the application using `poetry run todo`.
+`uv run todo` コマンドを使用してアプリケーションを実行できます。
 
-### Commands
+### コマンド
 
-#### Add a Task
-Add a new task. Priority is 1 (high) to 5 (low). Default is 3.
+#### タスクの追加
+新しいタスクを追加します。優先度は 1（高）から 5（低）で、デフォルトは 3 です。
 
 ```bash
-poetry run todo add "Buy milk" --priority 1 --category shopping
-poetry run todo add "Finish report" --due-date 2026-03-01
+uv run todo add "牛乳を買う" --priority 1 --category shopping
+uv run todo add "レポートを終わらせる" --due-date 2026-03-01
 ```
 
-#### List Tasks
-List all tasks. You can filter by category or sort.
+#### タスクの一覧表示
+すべてのタスクを表示します。カテゴリでのフィルタリングやソートが可能です。
 
 ```bash
-# List all
-poetry run todo list
+# すべて表示
+uv run todo list
 
-# Filter by category
-poetry run todo list --category shopping
+# カテゴリでフィルタリング
+uv run todo list --category shopping
 
-# Sort by priority (High to Low)
-poetry run todo list --sort-by priority
+# 優先度順にソート（高い順）
+uv run todo list --sort-by priority
 
-# Sort by due date (Soonest first)
-poetry run todo list --sort-by due-date
+# 期限順にソート（近い順）
+uv run todo list --sort-by due-date
 ```
 
-#### Edit a Task
-Edit an existing task by ID.
+#### タスクの編集
+IDを指定して既存のタスクを編集します。
 
 ```bash
-poetry run todo edit 1 --title "Buy almond milk" --priority 2
+uv run todo edit 1 --title "アーモンドミルクを買う" --priority 2
 ```
 
-#### Complete a Task
-Mark a task as completed.
+#### タスクの完了
+タスクを完了状態にします。
 
 ```bash
-poetry run todo complete 1
+uv run todo complete 1
 ```
 
-#### Delete a Task
-Delete a task by ID.
+#### タスクの削除
+IDを指定してタスクを削除します。
 
 ```bash
-poetry run todo delete 1
+uv run todo delete 1
 ```
 
-#### Search Tasks
-Search for tasks containing a keyword in the title.
+#### タスクの検索
+タイトルにキーワードを含むタスクを検索します。
 
 ```bash
-poetry run todo search "milk"
+uv run todo search "牛乳"
 ```
 
-## Testing
+## テスト
 
-Run the test suite to ensure everything is working correctly:
+テストスイートを実行して、すべてが正しく動作していることを確認します：
 
 ```bash
-poetry run pytest
+uv run pytest
 ```
