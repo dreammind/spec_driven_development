@@ -1,0 +1,18 @@
+[project]
+name = "todo_cli"
+version = "0.1.0"
+description = "CLI TODO app"
+authors = ["Your Name <your@email.com>"]
+dependencies = [
+    "typer",
+    "pydantic",
+    "mypy"
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest"
+]
+
+[tool.uv.scripts]
+todo = "src/todo.py"

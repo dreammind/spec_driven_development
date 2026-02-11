@@ -1,0 +1,28 @@
+name: Local Config
+version: 1.0.0
+schema: v1
+
+models:
+  - name: smart
+    provider: openai
+    model: gpt-4.1
+    apiKey: ${OPENAI_API_KEY}
+    roles: [chat, edit, apply, summarize]
+    defaultCompletionOptions:
+      temperature: 0.2
+      maxTokens: 1200
+
+  - name: fast
+    provider: openai
+    model: gpt-4.1-mini
+    apiKey: ${OPENAI_API_KEY}
+    roles: [autocomplete]
+    defaultCompletionOptions:
+      temperature: 0.2
+      maxTokens: 80
+
+context:
+  - provider: file
+  - provider: code
+  - provider: diff
+  - provider: terminal
