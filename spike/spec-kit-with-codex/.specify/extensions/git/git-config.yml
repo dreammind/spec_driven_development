@@ -1,62 +1,62 @@
-# Git Branching Workflow Extension Configuration
-# Copied to .specify/extensions/git/git-config.yml on install
+# Git ブランチ運用拡張の設定
+# インストール時に .specify/extensions/git/git-config.yml へコピーされます
 
-# Branch numbering strategy: "sequential" (001, 002, ...) or "timestamp" (YYYYMMDD-HHMMSS)
+# ブランチ採番戦略: "sequential" (001, 002, ...) または "timestamp" (YYYYMMDD-HHMMSS)
 branch_numbering: sequential
 
-# Commit message used by `git commit` during repository initialization
-init_commit_message: "[Spec Kit] Initial commit"
+# リポジトリ初期化時に `git commit` で使用するコミットメッセージ
+init_commit_message: "[Spec Kit] 初期コミット"
 
-# Auto-commit before/after core commands.
-# Set "default" to enable for all commands, then override per-command.
-# Each key can be true/false. Message is customizable per-command.
+# コアコマンドの前後で自動コミットを実行します。
+# 全体有効化は "default" を設定し、必要に応じてコマンド単位で上書きします。
+# 各キーの enabled は true/false。message はコマンド単位でカスタマイズ可能です。
 auto_commit:
   default: false
   before_clarify:
     enabled: false
-    message: "[Spec Kit] Save progress before clarification"
+    message: "[Spec Kit] 明確化前に進捗を保存"
   before_plan:
     enabled: false
-    message: "[Spec Kit] Save progress before planning"
+    message: "[Spec Kit] 計画前に進捗を保存"
   before_tasks:
     enabled: false
-    message: "[Spec Kit] Save progress before task generation"
+    message: "[Spec Kit] タスク生成前に進捗を保存"
   before_implement:
     enabled: false
-    message: "[Spec Kit] Save progress before implementation"
+    message: "[Spec Kit] 実装前に進捗を保存"
   before_checklist:
     enabled: false
-    message: "[Spec Kit] Save progress before checklist"
+    message: "[Spec Kit] チェックリスト前に進捗を保存"
   before_analyze:
     enabled: false
-    message: "[Spec Kit] Save progress before analysis"
+    message: "[Spec Kit] 分析前に進捗を保存"
   before_taskstoissues:
     enabled: false
-    message: "[Spec Kit] Save progress before issue sync"
+    message: "[Spec Kit] Issue 同期前に進捗を保存"
   after_constitution:
     enabled: false
-    message: "[Spec Kit] Add project constitution"
+    message: "[Spec Kit] プロジェクト憲章を追加"
   after_specify:
     enabled: false
-    message: "[Spec Kit] Add specification"
+    message: "[Spec Kit] 仕様を追加"
   after_clarify:
     enabled: false
-    message: "[Spec Kit] Clarify specification"
+    message: "[Spec Kit] 仕様を明確化"
   after_plan:
     enabled: false
-    message: "[Spec Kit] Add implementation plan"
+    message: "[Spec Kit] 実装計画を追加"
   after_tasks:
     enabled: false
-    message: "[Spec Kit] Add tasks"
+    message: "[Spec Kit] タスクを追加"
   after_implement:
     enabled: false
-    message: "[Spec Kit] Implementation progress"
+    message: "[Spec Kit] 実装の進捗"
   after_checklist:
     enabled: false
-    message: "[Spec Kit] Add checklist"
+    message: "[Spec Kit] チェックリストを追加"
   after_analyze:
     enabled: false
-    message: "[Spec Kit] Add analysis report"
+    message: "[Spec Kit] 分析レポートを追加"
   after_taskstoissues:
     enabled: false
-    message: "[Spec Kit] Sync tasks to issues"
+    message: "[Spec Kit] タスクを Issue に同期"

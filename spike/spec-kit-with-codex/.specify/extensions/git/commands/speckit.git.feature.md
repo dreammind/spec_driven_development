@@ -1,10 +1,12 @@
 ---
-description: "Create a feature branch with sequential or timestamp numbering"
+description: "連番またはタイムスタンプ形式で機能ブランチを作成する"
 ---
 
-# Create Feature Branch
+# 機能ブランチ作成
 
-Create and switch to a new git feature branch for the given specification. This command handles **branch creation only** — the spec directory and files are created by the core `/speckit.specify` workflow.
+指定された仕様に対して新しい Git 機能ブランチを作成し、切り替えます。
+このコマンドは **ブランチ作成のみ** を扱います。spec ディレクトリとファイルは
+コアの `/speckit.specify` ワークフローで作成されます。
 
 ## User Input
 
@@ -12,36 +14,38 @@ Create and switch to a new git feature branch for the given specification. This 
 $ARGUMENTS
 ```
 
-You **MUST** consider the user input before proceeding (if not empty).
+入力が空でない場合、処理前に **必ず** 反映してください。
 
 ## Environment Variable Override
 
-If the user explicitly provided `GIT_BRANCH_NAME` (e.g., via environment variable, argument, or in their request), pass it through to the script by setting the `GIT_BRANCH_NAME` environment variable before invoking the script. When `GIT_BRANCH_NAME` is set:
-- The script uses the exact value as the branch name, bypassing all prefix/suffix generation
-- `--short-name`, `--number`, and `--timestamp` flags are ignored
-- `FEATURE_NUM` is extracted from the name if it starts with a numeric prefix, otherwise set to the full branch name
+ユーザーが `GIT_BRANCH_NAME` を明示指定した場合（環境変数・引数・要求文）、
+スクリプト実行前に `GIT_BRANCH_NAME` 環境変数として渡してください。
+`GIT_BRANCH_NAME` が設定されている場合:
+- その値をブランチ名としてそのまま使用（prefix/suffix 自動生成は無効）
+- `--short-name` / `--number` / `--timestamp` は無視
+- 先頭が数値プレフィックスなら `FEATURE_NUM` に抽出し、そうでなければブランチ名全体を `FEATURE_NUM` に設定
 
 ## Prerequisites
 
-- Verify Git is available by running `git rev-parse --is-inside-work-tree 2>/dev/null`
-- If Git is not available, warn the user and skip branch creation
+- `git rev-parse --is-inside-work-tree 2>/dev/null` で Git 利用可否を確認
+- Git が利用できない場合は警告してブランチ作成をスキップ
 
 ## Branch Numbering Mode
 
-Determine the branch numbering strategy by checking configuration in this order:
+次の順で設定を確認し、採番戦略を決定します:
 
-1. Check `.specify/extensions/git/git-config.yml` for `branch_numbering` value
-2. Check `.specify/init-options.json` for `branch_numbering` value (backward compatibility)
-3. Default to `sequential` if neither exists
+1. `.specify/extensions/git/git-config.yml` の `branch_numbering`
+2. `.specify/init-options.json` の `branch_numbering`（後方互換）
+3. どちらも無ければ `sequential` を既定値とする
 
 ## Execution
 
-Generate a concise short name (2-4 words) for the branch:
-- Analyze the feature description and extract the most meaningful keywords
-- Use action-noun format when possible (e.g., "add-user-auth", "fix-payment-bug")
-- Preserve technical terms and acronyms (OAuth2, API, JWT, etc.)
+ブランチ短縮名（2〜4語）を簡潔に生成:
+- 機能説明を解析し、意味のあるキーワードを抽出
+- 可能なら動詞-名詞形式（例: `add-user-auth`, `fix-payment-bug`）
+- 技術用語や略語（OAuth2, API, JWT など）を保持
 
-Run the appropriate script based on your platform:
+プラットフォームに応じて適切なスクリプトを実行:
 
 - **Bash**: `.specify/extensions/git/scripts/bash/create-new-feature.sh --json --short-name "<short-name>" "<feature description>"`
 - **Bash (timestamp)**: `.specify/extensions/git/scripts/bash/create-new-feature.sh --json --timestamp --short-name "<short-name>" "<feature description>"`
@@ -49,19 +53,19 @@ Run the appropriate script based on your platform:
 - **PowerShell (timestamp)**: `.specify/extensions/git/scripts/powershell/create-new-feature.ps1 -Json -Timestamp -ShortName "<short-name>" "<feature description>"`
 
 **IMPORTANT**:
-- Do NOT pass `--number` — the script determines the correct next number automatically
-- Always include the JSON flag (`--json` for Bash, `-Json` for PowerShell) so the output can be parsed reliably
-- You must only ever run this script once per feature
-- The JSON output will contain `BRANCH_NAME` and `FEATURE_NUM`
+- `--number` は渡さない（次番号はスクリプトが自動決定）
+- JSON フラグは必須（Bash は `--json`、PowerShell は `-Json`）
+- 1機能につきこのスクリプト実行は1回のみ
+- JSON 出力には `BRANCH_NAME` と `FEATURE_NUM` が含まれる
 
 ## Graceful Degradation
 
-If Git is not installed or the current directory is not a Git repository:
-- Branch creation is skipped with a warning: `[specify] Warning: Git repository not detected; skipped branch creation`
-- The script still outputs `BRANCH_NAME` and `FEATURE_NUM` so the caller can reference them
+Git 未インストール、または現在ディレクトリが Git リポジトリでない場合:
+- 警告付きでブランチ作成をスキップ: `[specify] Warning: Git repository not detected; skipped branch creation`
+- それでも呼び出し側が参照できるよう `BRANCH_NAME` と `FEATURE_NUM` は出力
 
 ## Output
 
-The script outputs JSON with:
-- `BRANCH_NAME`: The branch name (e.g., `003-user-auth` or `20260319-143022-user-auth`)
-- `FEATURE_NUM`: The numeric or timestamp prefix used
+スクリプトは次を含む JSON を出力:
+- `BRANCH_NAME`: ブランチ名（例: `003-user-auth` または `20260319-143022-user-auth`）
+- `FEATURE_NUM`: 使用された数値またはタイムスタンプのプレフィックス

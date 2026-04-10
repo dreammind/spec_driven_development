@@ -1,40 +1,40 @@
 ---
-description: "Auto-commit changes after a Spec Kit command completes"
+description: "Spec Kit コマンド完了後に変更を自動コミットする"
 ---
 
-# Auto-Commit Changes
+# 変更の自動コミット
 
-Automatically stage and commit all changes after a Spec Kit command completes.
+Spec Kit コマンド完了後に、変更を自動でステージしてコミットします。
 
 ## Behavior
 
-This command is invoked as a hook after (or before) core commands. It:
+このコマンドはコアコマンドの前後フックとして呼び出され、次を行います:
 
-1. Determines the event name from the hook context (e.g., if invoked as an `after_specify` hook, the event is `after_specify`; if `before_plan`, the event is `before_plan`)
-2. Checks `.specify/extensions/git/git-config.yml` for the `auto_commit` section
-3. Looks up the specific event key to see if auto-commit is enabled
-4. Falls back to `auto_commit.default` if no event-specific key exists
-5. Uses the per-command `message` if configured, otherwise a default message
-6. If enabled and there are uncommitted changes, runs `git add .` + `git commit`
+1. フック文脈からイベント名を判定（例: `after_specify`, `before_plan`）
+2. `.specify/extensions/git/git-config.yml` の `auto_commit` セクションを確認
+3. イベント固有キーで自動コミット有効化を確認
+4. イベント設定がない場合は `auto_commit.default` にフォールバック
+5. 設定された `message` があれば使用、なければ既定メッセージを使用
+6. 有効かつ未コミット変更がある場合、`git add .` と `git commit` を実行
 
 ## Execution
 
-Determine the event name from the hook that triggered this command, then run the script:
+このコマンドを起動したフックのイベント名を判定し、スクリプトを実行します:
 
 - **Bash**: `.specify/extensions/git/scripts/bash/auto-commit.sh <event_name>`
 - **PowerShell**: `.specify/extensions/git/scripts/powershell/auto-commit.ps1 <event_name>`
 
-Replace `<event_name>` with the actual hook event (e.g., `after_specify`, `before_plan`, `after_implement`).
+`<event_name>` には実際のイベント（`after_specify`, `before_plan`, `after_implement` など）を設定します。
 
 ## Configuration
 
-In `.specify/extensions/git/git-config.yml`:
+`.specify/extensions/git/git-config.yml`:
 
 ```yaml
 auto_commit:
-  default: false          # Global toggle — set true to enable for all commands
+  default: false          # 全体トグル。すべてのコマンドで有効化するなら true
   after_specify:
-    enabled: true          # Override per-command
+    enabled: true         # コマンド単位の上書き
     message: "[Spec Kit] Add specification"
   after_plan:
     enabled: false
@@ -43,6 +43,6 @@ auto_commit:
 
 ## Graceful Degradation
 
-- If Git is not available or the current directory is not a repository: skips with a warning
-- If no config file exists: skips (disabled by default)
-- If no changes to commit: skips with a message
+- Git が利用できない、またはリポジトリでない: 警告してスキップ
+- 設定ファイルがない: スキップ（既定で無効）
+- コミット対象の変更がない: メッセージを出してスキップ

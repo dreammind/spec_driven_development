@@ -1,63 +1,65 @@
-# Git Branching Workflow Extension
+# Git ブランチ運用拡張
 
-Git repository initialization, feature branch creation, numbering (sequential/timestamp), validation, remote detection, and auto-commit for Spec Kit.
+Spec Kit 向けに、Git リポジトリ初期化、機能ブランチ作成、採番（連番/タイムスタンプ）、
+検証、リモート検出、自動コミットを提供します。
 
 ## Overview
 
-This extension provides Git operations as an optional, self-contained module. It manages:
+この拡張は、任意で利用できる自己完結モジュールとして Git 操作を提供します。
+主な機能:
 
-- **Repository initialization** with configurable commit messages
-- **Feature branch creation** with sequential (`001-feature-name`) or timestamp (`20260319-143022-feature-name`) numbering
-- **Branch validation** to ensure branches follow naming conventions
-- **Git remote detection** for GitHub integration (e.g., issue creation)
-- **Auto-commit** after core commands (configurable per-command with custom messages)
+- 設定可能なコミットメッセージによる **リポジトリ初期化**
+- 連番 (`001-feature-name`) / タイムスタンプ (`20260319-143022-feature-name`) の **機能ブランチ作成**
+- 命名規則順守を確認する **ブランチ検証**
+- GitHub 連携（Issue 作成など）向け **Git リモート検出**
+- コアコマンド後の **自動コミット**（コマンド単位で有効化/メッセージ設定可能）
 
 ## Commands
 
 | Command | Description |
 |---------|-------------|
-| `speckit.git.initialize` | Initialize a Git repository with a configurable commit message |
-| `speckit.git.feature` | Create a feature branch with sequential or timestamp numbering |
-| `speckit.git.validate` | Validate current branch follows feature branch naming conventions |
-| `speckit.git.remote` | Detect Git remote URL for GitHub integration |
-| `speckit.git.commit` | Auto-commit changes (configurable per-command enable/disable and messages) |
+| `speckit.git.initialize` | 設定可能なコミットメッセージで Git リポジトリを初期化 |
+| `speckit.git.feature` | 連番またはタイムスタンプで機能ブランチを作成 |
+| `speckit.git.validate` | 現在ブランチが機能ブランチ命名規約に従うか検証 |
+| `speckit.git.remote` | GitHub 連携のため Git リモート URL を検出 |
+| `speckit.git.commit` | 変更を自動コミット（コマンド単位で有効/無効とメッセージ設定可） |
 
 ## Hooks
 
 | Event | Command | Optional | Description |
 |-------|---------|----------|-------------|
-| `before_constitution` | `speckit.git.initialize` | No | Init git repo before constitution |
-| `before_specify` | `speckit.git.feature` | No | Create feature branch before specification |
-| `before_clarify` | `speckit.git.commit` | Yes | Commit outstanding changes before clarification |
-| `before_plan` | `speckit.git.commit` | Yes | Commit outstanding changes before planning |
-| `before_tasks` | `speckit.git.commit` | Yes | Commit outstanding changes before task generation |
-| `before_implement` | `speckit.git.commit` | Yes | Commit outstanding changes before implementation |
-| `before_checklist` | `speckit.git.commit` | Yes | Commit outstanding changes before checklist |
-| `before_analyze` | `speckit.git.commit` | Yes | Commit outstanding changes before analysis |
-| `before_taskstoissues` | `speckit.git.commit` | Yes | Commit outstanding changes before issue sync |
-| `after_constitution` | `speckit.git.commit` | Yes | Auto-commit after constitution update |
-| `after_specify` | `speckit.git.commit` | Yes | Auto-commit after specification |
-| `after_clarify` | `speckit.git.commit` | Yes | Auto-commit after clarification |
-| `after_plan` | `speckit.git.commit` | Yes | Auto-commit after planning |
-| `after_tasks` | `speckit.git.commit` | Yes | Auto-commit after task generation |
-| `after_implement` | `speckit.git.commit` | Yes | Auto-commit after implementation |
-| `after_checklist` | `speckit.git.commit` | Yes | Auto-commit after checklist |
-| `after_analyze` | `speckit.git.commit` | Yes | Auto-commit after analysis |
-| `after_taskstoissues` | `speckit.git.commit` | Yes | Auto-commit after issue sync |
+| `before_constitution` | `speckit.git.initialize` | No | 憲章作成前に git リポジトリを初期化 |
+| `before_specify` | `speckit.git.feature` | No | 仕様作成前に機能ブランチを作成 |
+| `before_clarify` | `speckit.git.commit` | Yes | 明確化前に未コミット変更をコミット |
+| `before_plan` | `speckit.git.commit` | Yes | 計画前に未コミット変更をコミット |
+| `before_tasks` | `speckit.git.commit` | Yes | タスク生成前に未コミット変更をコミット |
+| `before_implement` | `speckit.git.commit` | Yes | 実装前に未コミット変更をコミット |
+| `before_checklist` | `speckit.git.commit` | Yes | チェックリスト前に未コミット変更をコミット |
+| `before_analyze` | `speckit.git.commit` | Yes | 分析前に未コミット変更をコミット |
+| `before_taskstoissues` | `speckit.git.commit` | Yes | Issue 同期前に未コミット変更をコミット |
+| `after_constitution` | `speckit.git.commit` | Yes | 憲章更新後に自動コミット |
+| `after_specify` | `speckit.git.commit` | Yes | 仕様作成後に自動コミット |
+| `after_clarify` | `speckit.git.commit` | Yes | 明確化後に自動コミット |
+| `after_plan` | `speckit.git.commit` | Yes | 計画後に自動コミット |
+| `after_tasks` | `speckit.git.commit` | Yes | タスク生成後に自動コミット |
+| `after_implement` | `speckit.git.commit` | Yes | 実装後に自動コミット |
+| `after_checklist` | `speckit.git.commit` | Yes | チェックリスト後に自動コミット |
+| `after_analyze` | `speckit.git.commit` | Yes | 分析後に自動コミット |
+| `after_taskstoissues` | `speckit.git.commit` | Yes | Issue 同期後に自動コミット |
 
 ## Configuration
 
-Configuration is stored in `.specify/extensions/git/git-config.yml`:
+設定は `.specify/extensions/git/git-config.yml` に保存されます:
 
 ```yaml
-# Branch numbering strategy: "sequential" or "timestamp"
+# ブランチ採番戦略: "sequential" または "timestamp"
 branch_numbering: sequential
 
-# Custom commit message for git init
+# git init 用のカスタムコミットメッセージ
 init_commit_message: "[Spec Kit] Initial commit"
 
-# Auto-commit per command (all disabled by default)
-# Example: enable auto-commit after specify
+# コマンド単位の自動コミット設定（既定はすべて無効）
+# 例: specify 後の自動コミットを有効化
 auto_commit:
   default: false
   after_specify:
@@ -68,33 +70,33 @@ auto_commit:
 ## Installation
 
 ```bash
-# Install the bundled git extension (no network required)
+# 同梱の git 拡張をインストール（ネットワーク不要）
 specify extension add git
 ```
 
 ## Disabling
 
 ```bash
-# Disable the git extension (spec creation continues without branching)
+# git 拡張を無効化（spec 作成はブランチ作成なしで継続）
 specify extension disable git
 
-# Re-enable it
+# 再度有効化
 specify extension enable git
 ```
 
 ## Graceful Degradation
 
-When Git is not installed or the directory is not a Git repository:
-- Spec directories are still created under `specs/`
-- Branch creation is skipped with a warning
-- Branch validation is skipped with a warning
-- Remote detection returns empty results
+Git 未インストール、または Git リポジトリでない場合:
+- `specs/` 配下の spec ディレクトリ作成は継続
+- ブランチ作成は警告付きでスキップ
+- ブランチ検証は警告付きでスキップ
+- リモート検出は空結果を返す
 
 ## Scripts
 
-The extension bundles cross-platform scripts:
+この拡張はクロスプラットフォームスクリプトを同梱:
 
-- `scripts/bash/create-new-feature.sh` — Bash implementation
-- `scripts/bash/git-common.sh` — Shared Git utilities (Bash)
-- `scripts/powershell/create-new-feature.ps1` — PowerShell implementation
-- `scripts/powershell/git-common.ps1` — Shared Git utilities (PowerShell)
+- `scripts/bash/create-new-feature.sh` — Bash 実装
+- `scripts/bash/git-common.sh` — 共有 Git ユーティリティ（Bash）
+- `scripts/powershell/create-new-feature.ps1` — PowerShell 実装
+- `scripts/powershell/git-common.ps1` — 共有 Git ユーティリティ（PowerShell）

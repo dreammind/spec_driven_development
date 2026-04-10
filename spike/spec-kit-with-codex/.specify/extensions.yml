@@ -7,142 +7,142 @@ hooks:
     command: speckit.git.initialize
     enabled: true
     optional: false
-    prompt: Execute speckit.git.initialize?
-    description: Initialize Git repository before constitution setup
+    prompt: speckit.git.initialize を実行しますか？
+    description: 憲章セットアップ前に Git リポジトリを初期化
     condition: null
   before_specify:
   - extension: git
     command: speckit.git.feature
     enabled: true
     optional: false
-    prompt: Execute speckit.git.feature?
-    description: Create feature branch before specification
+    prompt: speckit.git.feature を実行しますか？
+    description: 仕様作成前に機能ブランチを作成
     condition: null
   before_clarify:
   - extension: git
     command: speckit.git.commit
     enabled: true
     optional: true
-    prompt: Commit outstanding changes before clarification?
-    description: Auto-commit before spec clarification
+    prompt: 明確化の前に未コミット変更をコミットしますか？
+    description: 仕様明確化前の自動コミット
     condition: null
   before_plan:
   - extension: git
     command: speckit.git.commit
     enabled: true
     optional: true
-    prompt: Commit outstanding changes before planning?
-    description: Auto-commit before implementation planning
+    prompt: 計画作成の前に未コミット変更をコミットしますか？
+    description: 実装計画前の自動コミット
     condition: null
   before_tasks:
   - extension: git
     command: speckit.git.commit
     enabled: true
     optional: true
-    prompt: Commit outstanding changes before task generation?
-    description: Auto-commit before task generation
+    prompt: タスク生成の前に未コミット変更をコミットしますか？
+    description: タスク生成前の自動コミット
     condition: null
   before_implement:
   - extension: git
     command: speckit.git.commit
     enabled: true
     optional: true
-    prompt: Commit outstanding changes before implementation?
-    description: Auto-commit before implementation
+    prompt: 実装の前に未コミット変更をコミットしますか？
+    description: 実装前の自動コミット
     condition: null
   before_checklist:
   - extension: git
     command: speckit.git.commit
     enabled: true
     optional: true
-    prompt: Commit outstanding changes before checklist?
-    description: Auto-commit before checklist generation
+    prompt: チェックリスト作成の前に未コミット変更をコミットしますか？
+    description: チェックリスト生成前の自動コミット
     condition: null
   before_analyze:
   - extension: git
     command: speckit.git.commit
     enabled: true
     optional: true
-    prompt: Commit outstanding changes before analysis?
-    description: Auto-commit before analysis
+    prompt: 分析の前に未コミット変更をコミットしますか？
+    description: 分析前の自動コミット
     condition: null
   before_taskstoissues:
   - extension: git
     command: speckit.git.commit
     enabled: true
     optional: true
-    prompt: Commit outstanding changes before issue sync?
-    description: Auto-commit before tasks-to-issues conversion
+    prompt: Issue 同期の前に未コミット変更をコミットしますか？
+    description: タスクから Issue 変換前の自動コミット
     condition: null
   after_constitution:
   - extension: git
     command: speckit.git.commit
     enabled: true
     optional: true
-    prompt: Commit constitution changes?
-    description: Auto-commit after constitution update
+    prompt: 憲章の変更をコミットしますか？
+    description: 憲章更新後の自動コミット
     condition: null
   after_specify:
   - extension: git
     command: speckit.git.commit
     enabled: true
     optional: true
-    prompt: Commit specification changes?
-    description: Auto-commit after specification
+    prompt: 仕様の変更をコミットしますか？
+    description: 仕様作成後の自動コミット
     condition: null
   after_clarify:
   - extension: git
     command: speckit.git.commit
     enabled: true
     optional: true
-    prompt: Commit clarification changes?
-    description: Auto-commit after spec clarification
+    prompt: 明確化の変更をコミットしますか？
+    description: 仕様明確化後の自動コミット
     condition: null
   after_plan:
   - extension: git
     command: speckit.git.commit
     enabled: true
     optional: true
-    prompt: Commit plan changes?
-    description: Auto-commit after implementation planning
+    prompt: 計画の変更をコミットしますか？
+    description: 実装計画後の自動コミット
     condition: null
   after_tasks:
   - extension: git
     command: speckit.git.commit
     enabled: true
     optional: true
-    prompt: Commit task changes?
-    description: Auto-commit after task generation
+    prompt: タスクの変更をコミットしますか？
+    description: タスク生成後の自動コミット
     condition: null
   after_implement:
   - extension: git
     command: speckit.git.commit
     enabled: true
     optional: true
-    prompt: Commit implementation changes?
-    description: Auto-commit after implementation
+    prompt: 実装の変更をコミットしますか？
+    description: 実装後の自動コミット
     condition: null
   after_checklist:
   - extension: git
     command: speckit.git.commit
     enabled: true
     optional: true
-    prompt: Commit checklist changes?
-    description: Auto-commit after checklist generation
+    prompt: チェックリストの変更をコミットしますか？
+    description: チェックリスト生成後の自動コミット
     condition: null
   after_analyze:
   - extension: git
     command: speckit.git.commit
     enabled: true
     optional: true
-    prompt: Commit analysis results?
-    description: Auto-commit after analysis
+    prompt: 分析結果をコミットしますか？
+    description: 分析後の自動コミット
     condition: null
   after_taskstoissues:
   - extension: git
     command: speckit.git.commit
     enabled: true
     optional: true
-    prompt: Commit after syncing issues?
-    description: Auto-commit after tasks-to-issues conversion
+    prompt: Issue 同期後の変更をコミットしますか？
+    description: タスクから Issue 変換後の自動コミット
     condition: null

@@ -1,49 +1,49 @@
 ---
-description: "Initialize a Git repository with an initial commit"
+description: "初回コミット付きで Git リポジトリを初期化する"
 ---
 
-# Initialize Git Repository
+# Git リポジトリ初期化
 
-Initialize a Git repository in the current project directory if one does not already exist.
+現在のプロジェクトディレクトリに Git リポジトリが存在しない場合、初期化します。
 
 ## Execution
 
-Run the appropriate script from the project root:
+プロジェクトルートから適切なスクリプトを実行します:
 
 - **Bash**: `.specify/extensions/git/scripts/bash/initialize-repo.sh`
 - **PowerShell**: `.specify/extensions/git/scripts/powershell/initialize-repo.ps1`
 
-If the extension scripts are not found, fall back to:
+拡張スクリプトが見つからない場合のフォールバック:
 - **Bash**: `git init && git add . && git commit -m "Initial commit from Specify template"`
 - **PowerShell**: `git init; git add .; git commit -m "Initial commit from Specify template"`
 
-The script handles all checks internally:
-- Skips if Git is not available
-- Skips if already inside a Git repository
-- Runs `git init`, `git add .`, and `git commit` with an initial commit message
+スクリプト内で次を処理します:
+- Git が利用できない場合はスキップ
+- 既に Git リポジトリ内ならスキップ
+- `git init`、`git add .`、`git commit` を初期コミットメッセージ付きで実行
 
 ## Customization
 
-Replace the script to add project-specific Git initialization steps:
-- Custom `.gitignore` templates
-- Default branch naming (`git config init.defaultBranch`)
-- Git LFS setup
-- Git hooks installation
-- Commit signing configuration
-- Git Flow initialization
+必要に応じてスクリプトを差し替え、プロジェクト固有の初期化を追加できます:
+- カスタム `.gitignore` テンプレート
+- デフォルトブランチ名 (`git config init.defaultBranch`)
+- Git LFS セットアップ
+- Git フックの導入
+- コミット署名設定
+- Git Flow 初期化
 
 ## Output
 
-On success:
+成功時:
 - `✓ Git repository initialized`
 
 ## Graceful Degradation
 
-If Git is not installed:
-- Warn the user
-- Skip repository initialization
-- The project continues to function without Git (specs can still be created under `specs/`)
+Git が未インストールの場合:
+- ユーザーへ警告
+- リポジトリ初期化をスキップ
+- Git なしでもプロジェクトは継続可能（`specs/` 配下の作成は可能）
 
-If Git is installed but `git init`, `git add .`, or `git commit` fails:
-- Surface the error to the user
-- Stop this command rather than continuing with a partially initialized repository
+Git はあるが `git init` / `git add .` / `git commit` が失敗した場合:
+- エラーをユーザーに提示
+- 中途半端な状態で継続せず、このコマンドを停止
