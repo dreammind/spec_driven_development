@@ -1,50 +1,93 @@
-# [PROJECT_NAME] Constitution
-<!-- Example: Spec Constitution, TaskFlow Constitution, etc. -->
+<!--
+同期影響レポート
+- バージョン変更: テンプレートのプレースホルダー -> 1.0.0
+- 変更した原則:
+  - 原則1プレースホルダー -> I. 仕様先行の定義
+  - 原則2プレースホルダー -> II. ストーリー単位のデリバリー
+  - 原則3プレースホルダー -> III. リスクベースの検証
+  - 原則4プレースホルダー -> IV. トレーサブルな計画
+  - 原則5プレースホルダー -> V. 最小で説明可能な変更
+- 追加したセクション:
+  - エンジニアリング制約
+  - デリバリーワークフローと品質ゲート
+- 削除したセクション:
+  - なし
+- 更新確認対象テンプレート:
+  - ✅ .specify/templates/plan-template.md（整合済み・編集不要）
+  - ✅ .specify/templates/spec-template.md（整合済み・編集不要）
+  - ✅ .specify/templates/tasks-template.md（整合済み・編集不要）
+  - ✅ .specify/templates/commands/*.md（ディレクトリなし・更新不要）
+  - ✅ README.md（原則に関する古い参照なし）
+- フォローアップTODO:
+  - なし
+-->
+# Spec Kit with Codex 憲章
 
-## Core Principles
+## コア原則
 
-### [PRINCIPLE_1_NAME]
-<!-- Example: I. Library-First -->
-[PRINCIPLE_1_DESCRIPTION]
-<!-- Example: Every feature starts as a standalone library; Libraries must be self-contained, independently testable, documented; Clear purpose required - no organizational-only libraries -->
+### I. 仕様先行の定義
+すべての機能開発は、`spec.md` に明示的な仕様を定義することから MUST 開始する。
+仕様にはユーザーストーリー、受け入れシナリオ、機能要件、測定可能な成果を含めること。
+合意済み仕様なしでの実装は許可しない。
+根拠: 明確な仕様は手戻りを防ぎ、実装をユーザー価値に整合させる。
 
-### [PRINCIPLE_2_NAME]
-<!-- Example: II. CLI Interface -->
-[PRINCIPLE_2_DESCRIPTION]
-<!-- Example: Every library exposes functionality via CLI; Text in/out protocol: stdin/args → stdout, errors → stderr; Support JSON + human-readable formats -->
+### II. ストーリー単位のデリバリー
+作業は、各ユーザーストーリーが独立して実装・テスト・実証できるように MUST 構成する。
+MVP の提供では、低優先度への拡張より先に最優先ストーリーを MUST 優先する。
+根拠: 独立したスライスはデリバリーリスクを下げ、段階的な検証を可能にする。
 
-### [PRINCIPLE_3_NAME]
-<!-- Example: III. Test-First (NON-NEGOTIABLE) -->
-[PRINCIPLE_3_DESCRIPTION]
-<!-- Example: TDD mandatory: Tests written → User approved → Tests fail → Then implement; Red-Green-Refactor cycle strictly enforced -->
+### III. リスクベースの検証
+検証の深さは変更リスクに MUST 対応させる。すべてのストーリーは仕様内に独立した
+テスト方法を MUST 含める。実装タスクでは、挙動・契約・連携を変更する場合に
+自動テストを MUST 追加する。
+根拠: 必要な箇所で品質を担保しつつ、過剰なプロセスを避けられる。
 
-### [PRINCIPLE_4_NAME]
-<!-- Example: IV. Integration Testing -->
-[PRINCIPLE_4_DESCRIPTION]
-<!-- Example: Focus areas requiring integration tests: New library contract tests, Contract changes, Inter-service communication, Shared schemas -->
+### IV. トレーサブルな計画
+計画とタスクは、要件から実装までの明示的なトレーサビリティを MUST 維持する。
+`plan.md` は技術コンテキストと憲章ゲートを MUST 記録する。`tasks.md` は具体的な
+ファイルパスと依存関係を示し、タスクをユーザーストーリーに MUST 紐づける。
+根拠: トレーサビリティはスコープを統制し、レビューを客観化する。
 
-### [PRINCIPLE_5_NAME]
-<!-- Example: V. Observability, VI. Versioning & Breaking Changes, VII. Simplicity -->
-[PRINCIPLE_5_DESCRIPTION]
-<!-- Example: Text I/O ensures debuggability; Structured logging required; Or: MAJOR.MINOR.BUILD format; Or: Start simple, YAGNI principles -->
+### V. 最小で説明可能な変更
+解決策は、現行要件を満たす最も単純な設計を MUST 優先する。例外を導入する場合は、
+複雑性に関するトレードオフを MUST 記録する。
+根拠: 単純性は保守コストを下げ、長期的な開発速度を向上させる。
 
-## [SECTION_2_NAME]
-<!-- Example: Additional Constraints, Security Requirements, Performance Standards, etc. -->
+## エンジニアリング制約
 
-[SECTION_2_CONTENT]
-<!-- Example: Technology stack requirements, compliance standards, deployment policies, etc. -->
+- リポジトリ運用は、Codex 互換のコマンド規約と `.specify/` および `specs/` 配下の
+  生成成果物を前提に MUST 実施する。
+- Git 利用時、機能ブランチはプロジェクト規約（`###-slug` または
+  `YYYYMMDD-HHMMSS-slug`）に MUST 従う。
+- 文書とテンプレートは、憲章改定後も憲章ルールと MUST 同期状態を保つ。
 
-## [SECTION_3_NAME]
-<!-- Example: Development Workflow, Review Process, Quality Gates, etc. -->
+## デリバリーワークフローと品質ゲート
 
-[SECTION_3_CONTENT]
-<!-- Example: Code review requirements, testing gates, deployment approval process, etc. -->
+1. Specify: 優先順位付きストーリーと測定可能な成果を含む `spec.md` を作成・更新する。
+2. Plan: 憲章ゲートと技術判断を含む `plan.md` を作成する。
+3. Tasks: ストーリー単位で依存関係順に並べた `tasks.md` を作成する。
+4. Implement: 優先順にタスクを実行し、各ストーリーを独立に検証する。
+5. Review: マージまたはリリース前に憲章準拠を確認する。
 
-## Governance
-<!-- Example: Constitution supersedes all other practices; Amendments require documentation, approval, migration plan -->
+MUST 通過すべき品質ゲート:
+- 仕様が十分に記述され、重大な未解決の曖昧さがないこと。
+- 要件から計画・実装へのトレーサビリティが確保されていること。
+- リスクと変更範囲に見合った検証エビデンスがあること。
 
-[GOVERNANCE_RULES]
-<!-- Example: All PRs/reviews must verify compliance; Complexity must be justified; Use [GUIDANCE_FILE] for runtime development guidance -->
+## ガバナンス
 
-**Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
-<!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->
+本憲章は、計画とデリバリーに関して矛盾するローカル運用ルールより優先される。
+改定には、(1) 変更提案、(2) 根拠、(3) テンプレートおよびワークフロー成果物への影響、
+（4）バージョン上げ区分を MUST 含める。
+
+バージョニングポリシー:
+- MAJOR: 互換性のないガバナンス変更、または原則の削除・再定義。
+- MINOR: 新しい原則・セクションの追加、または実質的なガイダンス拡張。
+- PATCH: 明確化、文言改善、または意味変更を伴わない更新。
+
+準拠レビュー期待事項:
+- すべての計画は、設計完了前に憲章チェックゲートを MUST 含める。
+- すべてのタスクセットは、ストーリーの独立性とトレーサビリティを MUST 維持する。
+- レビュアーは、交渉不可の原則に反する変更を MUST ブロックする。
+
+**Version**: 1.0.0 | **Ratified**: 2026-04-10 | **Last Amended**: 2026-04-10
