@@ -13,25 +13,25 @@ uv sync
 
 ```bash
 # タスク追加
-uv run python -m todo_cli.cli add --title "牛乳を買う"
+uv run todo add --title "牛乳を買う"
 
 # 既定一覧（未完了のみ）
-uv run python -m todo_cli.cli list
+uv run todo list
 
 # 完了済みを含む一覧
-uv run python -m todo_cli.cli list --all-active
+uv run todo list --all-active
 
 # 完了化
-uv run python -m todo_cli.cli complete --id <uuid>
+uv run todo complete --id <uuid>
 
 # 未完了化
-uv run python -m todo_cli.cli reopen --id <uuid>
+uv run todo reopen --id <uuid>
 
 # アーカイブ
-uv run python -m todo_cli.cli archive --id <uuid>
+uv run todo archive --id <uuid>
 
 # 復元（未完了で戻る）
-uv run python -m todo_cli.cli restore --id <uuid>
+uv run todo restore --id <uuid>
 ```
 
 ## 3. テスト実行

@@ -29,6 +29,10 @@ class TaskNotArchivedError(TaskRepositoryError):
     pass
 
 
+class TaskEditArchivedError(TaskRepositoryError):
+    pass
+
+
 class TaskValidationError(TaskRepositoryError):
     pass
 
@@ -124,5 +128,25 @@ class TaskRepository:
             raise TaskNotArchivedError(f"task is not archived: {parsed_id}")
 
         collection.tasks[idx] = collection.tasks[idx].restore()
+        self.save_collection(collection)
+        return collection.tasks[idx]
+
+    def edit_task_title(self, task_id: str, new_title: str) -> Task:
+        parsed_id = self._parse_id(task_id)
+        collection = self.load_collection()
+        idx = self._find_index(collection.tasks, parsed_id)
+        task = collection.tasks[idx]
+
+        if task.is_archived:
+            raise TaskEditArchivedError(
+                f"task is archived; restore before editing: {parsed_id}"
+            )
+
+        try:
+            normalized_title = Task.normalize_title(new_title)
+        except ValueError as exc:
+            raise TaskValidationError(str(exc)) from exc
+
+        collection.tasks[idx] = task.model_copy(update={"title": normalized_title})
         self.save_collection(collection)
         return collection.tasks[idx]

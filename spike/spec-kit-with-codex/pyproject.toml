@@ -12,6 +12,9 @@ dependencies = [
   "pydantic>=2.7.0",
 ]
 
+[project.scripts]
+todo = "todo_cli.cli:main"
+
 [dependency-groups]
 dev = [
   "pytest>=8.2.0",

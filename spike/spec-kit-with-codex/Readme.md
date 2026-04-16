@@ -37,7 +37,7 @@ $ specify init . --ai codex --ai-skills
 
 ### /speckit.clarify で曖昧な仕様を決める
 
-* 曖昧な仕様を質問形式で聞かれる。それに答えていくとしようが確定する
+* 曖昧な仕様を質問形式で聞かれる。それに答えていくと仕様が確定する
 
 ### /speckit.git commit でここまでの変更をcommit
 
@@ -71,6 +71,11 @@ specs/001-cli-todo-app
 ## /speckit.implement で実装
 
 * `specs/001-cli-todo-app/tasks.md`に沿って実装が進む。完了した時にチェックが入る
+* CLIの実行は `python -m` なしで `uv run todo ...` を使えるようにした
+```bash
+uv run todo list
+uv run todo add --title "牛乳を買う"
+```
 
 ## ステップ2に進む
 
@@ -80,3 +85,6 @@ specs/001-cli-todo-app
 * タスクタイトルの編集機能が欲しいとした
 * 通常なら、別ブランチが作成されるはずだが、されなかった。
 * codexに修正してもらった
+* /speckit.Git Feature で002-edit-task-title ブランチが作成された
+
+## /speckit.Specify タスクタイトルの編集機能が欲しいと

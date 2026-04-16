@@ -7,6 +7,7 @@ import pytest
 from todo_cli.repository import (
     InvalidTaskIdError,
     TaskAlreadyArchivedError,
+    TaskEditArchivedError,
     TaskNotArchivedError,
     TaskNotFoundError,
     TaskRepository,
@@ -66,3 +67,37 @@ def test_restore_sets_incomplete(tmp_path: Path) -> None:
     restored = repo.restore_task(str(task.id))
     assert restored.is_archived is False
     assert restored.is_completed is False
+
+
+def test_edit_task_title_updates_only_title(tmp_path: Path) -> None:
+    repo = TaskRepository(tmp_path / "tasks.json")
+    task = repo.add_task("before")
+    updated = repo.edit_task_title(str(task.id), "  after  ")
+    assert updated.title == "after"
+    assert updated.id == task.id
+    assert updated.is_completed == task.is_completed
+    assert updated.is_archived == task.is_archived
+    assert updated.created_at == task.created_at
+
+
+def test_edit_task_title_with_missing_id_raises(tmp_path: Path) -> None:
+    repo = TaskRepository(tmp_path / "tasks.json")
+    with pytest.raises(TaskNotFoundError):
+        repo.edit_task_title("cb5f4da4-8ba6-4ce9-9b58-849534f4f5d3", "x")
+
+
+def test_edit_task_title_on_archived_task_raises(tmp_path: Path) -> None:
+    repo = TaskRepository(tmp_path / "tasks.json")
+    task = repo.add_task("before")
+    repo.archive_task(str(task.id))
+    with pytest.raises(TaskEditArchivedError):
+        repo.edit_task_title(str(task.id), "after")
+
+
+def test_edit_task_title_invalid_input_raises_validation(tmp_path: Path) -> None:
+    repo = TaskRepository(tmp_path / "tasks.json")
+    task = repo.add_task("before")
+    with pytest.raises(TaskValidationError):
+        repo.edit_task_title(str(task.id), "   ")
+    with pytest.raises(TaskValidationError):
+        repo.edit_task_title(str(task.id), "x" * 256)

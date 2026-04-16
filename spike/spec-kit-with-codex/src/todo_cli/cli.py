@@ -7,6 +7,7 @@ from typing import Sequence
 
 from todo_cli.app import TodoApp
 from todo_cli.repository import (
+    TaskEditArchivedError,
     InvalidTaskIdError,
     TaskAlreadyArchivedError,
     TaskNotArchivedError,
@@ -47,6 +48,10 @@ def build_parser() -> argparse.ArgumentParser:
 
     restore_cmd = subparsers.add_parser("restore", help="Restore archived task")
     restore_cmd.add_argument("--id", required=True, help="Task ID (UUID)")
+
+    edit_cmd = subparsers.add_parser("edit", help="Edit task title")
+    edit_cmd.add_argument("--id", required=True, help="Task ID (UUID)")
+    edit_cmd.add_argument("--title", required=True, help="New task title")
 
     return parser
 
@@ -96,6 +101,11 @@ def run(argv: Sequence[str] | None = None) -> int:
             print(f"restored: {task.id}")
             return 0
 
+        if args.command == "edit":
+            task = app.edit_task_title(args.id, args.title)
+            print(f"edited: {task.id} | {task.title}")
+            return 0
+
         parser.print_help()
         return 2
     except (
@@ -103,6 +113,7 @@ def run(argv: Sequence[str] | None = None) -> int:
         TaskNotFoundError,
         TaskAlreadyArchivedError,
         TaskNotArchivedError,
+        TaskEditArchivedError,
         TaskValidationError,
     ) as exc:
         print(str(exc), file=sys.stderr)
