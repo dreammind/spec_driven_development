@@ -71,3 +71,12 @@ specs/001-cli-todo-app
 ## /speckit.implement で実装
 
 * `specs/001-cli-todo-app/tasks.md`に沿って実装が進む。完了した時にチェックが入る
+
+## ステップ2に進む
+
+
+## /speckit.Git Feature
+
+* タスクタイトルの編集機能が欲しいとした
+* 通常なら、別ブランチが作成されるはずだが、されなかった。
+* codexに修正してもらった

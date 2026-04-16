@@ -108,9 +108,9 @@ has_git() {
     # First check if git command is available (before calling get_repo_root which may use git)
     command -v git >/dev/null 2>&1 || return 1
     local repo_root=$(get_repo_root)
-    # Check if .git exists (directory or file for worktrees/submodules)
-    [ -e "$repo_root/.git" ] || return 1
-    # Verify it's actually a valid git work tree
+    # Verify it's actually a valid git work tree.
+    # Do not require "$repo_root/.git" to exist because this project may live
+    # in a subdirectory of a larger repository.
     git -C "$repo_root" rev-parse --is-inside-work-tree >/dev/null 2>&1
 }
 
@@ -359,4 +359,3 @@ except Exception:
     # Callers running under set -e should use: TEMPLATE=$(resolve_template ...) || true
     return 1
 }
-
