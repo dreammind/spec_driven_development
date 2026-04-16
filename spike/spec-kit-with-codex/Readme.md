@@ -65,3 +65,6 @@ specs/001-cli-todo-app
 * python は uv を使いたいです
 
 ## /speckit.tasks でタスクを作る
+
+* タスクを作成した
+

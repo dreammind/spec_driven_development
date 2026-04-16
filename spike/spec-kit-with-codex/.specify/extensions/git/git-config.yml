@@ -22,7 +22,7 @@ auto_commit:
     enabled: false
     message: "[Spec Kit] タスク生成前に進捗を保存"
   before_implement:
-    enabled: false
+    enabled: true
     message: "[Spec Kit] 実装前に進捗を保存"
   before_checklist:
     enabled: false
