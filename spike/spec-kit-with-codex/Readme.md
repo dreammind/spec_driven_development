@@ -41,9 +41,6 @@ $ specify init . --ai codex --ai-skills
 
 ### /speckit.git commit でここまでの変更をcommit
 
-
-
-
 ### /speckit.plan で計画を立てる
 
 * cli-contract.md, data-model.md, plan.md, quickstart.md, research.mdが生成される
@@ -66,3 +63,5 @@ specs/001-cli-todo-app
 * ライブラリのpydantic でデータの検証と型管理したいです
 * 型チェックによる安全性を確保したいです
 * python は uv を使いたいです
+
+## /speckit.tasks でタスクを作る
