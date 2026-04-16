@@ -68,3 +68,6 @@ specs/001-cli-todo-app
 
 * タスクを作成した
 
+## /speckit.implement で実装
+
+* `specs/001-cli-todo-app/tasks.md`に沿って実装が進む。完了した時にチェックが入る
