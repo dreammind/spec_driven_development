@@ -31,3 +31,38 @@ $ specify init . --ai codex --ai-skills
 *  `constitution.md` にTDDなどの原則を追記する
 
 ### /speckit.specify で仕様を決める
+
+* `specs/001-cli-todo-app`が生成され、`specs/001-cli-todo-app/spec.md`, `specs/001-cli-todo-app/checklists/requirements.md`が生成された
+* `spec.md`の一部と`requirement.md`が英語だったので、日本語化した
+
+### /speckit.clarify で曖昧な仕様を決める
+
+* 曖昧な仕様を質問形式で聞かれる。それに答えていくとしようが確定する
+
+### /speckit.git commit でここまでの変更をcommit
+
+
+
+
+### /speckit.plan で計画を立てる
+
+* cli-contract.md, data-model.md, plan.md, quickstart.md, research.mdが生成される
+```text
+$ tree specs/001-cli-todo-app
+specs/001-cli-todo-app
+├── checklists
+│   └── requirements.md
+├── contracts
+│   └── cli-contract.md
+├── data-model.md
+├── plan.md
+├── quickstart.md
+├── research.md
+└── spec.md
+```
+
+### 下記を追加した
+* テストカバレッジ90%以上を目標にします
+* ライブラリのpydantic でデータの検証と型管理したいです
+* 型チェックによる安全性を確保したいです
+* python は uv を使いたいです

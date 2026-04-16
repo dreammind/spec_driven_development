@@ -43,7 +43,7 @@ auto_commit:
     enabled: true
     message: "[Spec Kit] 仕様を明確化"
   after_plan:
-    enabled: false
+    enabled: true
     message: "[Spec Kit] 実装計画を追加"
   after_tasks:
     enabled: false
