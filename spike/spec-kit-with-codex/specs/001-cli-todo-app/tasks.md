@@ -16,10 +16,10 @@
 
 **Purpose**: Python + uv + pydantic + pytest + mypy の実装基盤を初期化する
 
-- [ ] T001 `pyproject.toml` に `pydantic`, `pytest`, `pytest-cov`, `mypy` を含む依存関係と実行設定を定義する
-- [ ] T002 `src/todo_cli/__init__.py`, `src/todo_cli/cli.py`, `src/todo_cli/app.py`, `src/todo_cli/models.py`, `src/todo_cli/repository.py` を作成する
-- [ ] T003 `tests/unit/test_models.py`, `tests/unit/test_repository.py`, `tests/integration/test_cli_workflows.py`, `tests/contract/test_cli_contract.py` を作成する
-- [ ] T004 `mypy.ini` に `src` と `tests` を対象とした型チェック設定を作成する
+- [X] T001 `pyproject.toml` に `pydantic`, `pytest`, `pytest-cov`, `mypy` を含む依存関係と実行設定を定義する
+- [X] T002 `src/todo_cli/__init__.py`, `src/todo_cli/cli.py`, `src/todo_cli/app.py`, `src/todo_cli/models.py`, `src/todo_cli/repository.py` を作成する
+- [X] T003 `tests/unit/test_models.py`, `tests/unit/test_repository.py`, `tests/integration/test_cli_workflows.py`, `tests/contract/test_cli_contract.py` を作成する
+- [X] T004 `mypy.ini` に `src` と `tests` を対象とした型チェック設定を作成する
 
 ---
 
@@ -29,11 +29,11 @@
 
 **⚠️ CRITICAL**: このフェーズ完了までユーザーストーリー作業を開始しない
 
-- [ ] T005 `src/todo_cli/models.py` に `Task` と `TaskCollection` の `pydantic.BaseModel` 骨組みを作成する
-- [ ] T006 `src/todo_cli/repository.py` に JSON ファイル読み書きと永続化境界（load/save）を実装する
-- [ ] T007 `src/todo_cli/app.py` にユースケース呼び出し用のアプリケーションサービス骨組みを作成する
-- [ ] T008 `src/todo_cli/cli.py` に `argparse` ベースのサブコマンドルーティングと終了コード制御を実装する
-- [ ] T009 [P] `tests/conftest.py` に一時ファイルストレージとCLI実行ヘルパーfixtureを追加する
+- [X] T005 `src/todo_cli/models.py` に `Task` と `TaskCollection` の `pydantic.BaseModel` 骨組みを作成する
+- [X] T006 `src/todo_cli/repository.py` に JSON ファイル読み書きと永続化境界（load/save）を実装する
+- [X] T007 `src/todo_cli/app.py` にユースケース呼び出し用のアプリケーションサービス骨組みを作成する
+- [X] T008 `src/todo_cli/cli.py` に `argparse` ベースのサブコマンドルーティングと終了コード制御を実装する
+- [X] T009 [P] `tests/conftest.py` に一時ファイルストレージとCLI実行ヘルパーfixtureを追加する
 
 **Checkpoint**: 基盤準備完了。以降、ユーザーストーリー実装を開始可能
 
@@ -47,17 +47,17 @@
 
 ### Tests for User Story 1
 
-- [ ] T010 [P] [US1] `tests/contract/test_cli_contract.py` に `todo add`/`todo list` の契約テストと空タイトル失敗テストを追加する
-- [ ] T011 [P] [US1] `tests/integration/test_cli_workflows.py` に追加→一覧表示の統合テストを追加する
-- [ ] T012 [P] [US1] `tests/unit/test_models.py` にUUID生成・タイトルバリデーションの単体テストを追加する
+- [X] T010 [P] [US1] `tests/contract/test_cli_contract.py` に `todo add`/`todo list` の契約テストと空タイトル失敗テストを追加する
+- [X] T011 [P] [US1] `tests/integration/test_cli_workflows.py` に追加→一覧表示の統合テストを追加する
+- [X] T012 [P] [US1] `tests/unit/test_models.py` にUUID生成・タイトルバリデーションの単体テストを追加する
 
 ### Implementation for User Story 1
 
-- [ ] T013 [US1] `src/todo_cli/models.py` にタイトルtrim/最小文字数・作成日時・UUIDの検証ロジックを実装する
-- [ ] T014 [US1] `src/todo_cli/repository.py` にタスク追加と既定一覧（未完了かつ非アーカイブ）取得を実装する
-- [ ] T015 [US1] `src/todo_cli/app.py` に `add_task` と `list_tasks` ユースケースを実装する
-- [ ] T016 [US1] `src/todo_cli/cli.py` に `todo add` と `todo list` コマンドを実装する
-- [ ] T017 [US1] `src/todo_cli/cli.py` に空状態メッセージと入力エラーメッセージを実装する
+- [X] T013 [US1] `src/todo_cli/models.py` にタイトルtrim/最小文字数・作成日時・UUIDの検証ロジックを実装する
+- [X] T014 [US1] `src/todo_cli/repository.py` にタスク追加と既定一覧（未完了かつ非アーカイブ）取得を実装する
+- [X] T015 [US1] `src/todo_cli/app.py` に `add_task` と `list_tasks` ユースケースを実装する
+- [X] T016 [US1] `src/todo_cli/cli.py` に `todo add` と `todo list` コマンドを実装する
+- [X] T017 [US1] `src/todo_cli/cli.py` に空状態メッセージと入力エラーメッセージを実装する
 
 **Checkpoint**: User Story 1 が単独で動作し、MVPとしてデモ可能
 
@@ -71,16 +71,16 @@
 
 ### Tests for User Story 2
 
-- [ ] T018 [P] [US2] `tests/contract/test_cli_contract.py` に `todo complete`/`todo reopen`/`todo list --all-active` の契約テストを追加する
-- [ ] T019 [P] [US2] `tests/integration/test_cli_workflows.py` に完了化→未完了化の統合テストを追加する
-- [ ] T020 [P] [US2] `tests/unit/test_repository.py` に未存在ID・不正IDの更新失敗テストを追加する
+- [X] T018 [P] [US2] `tests/contract/test_cli_contract.py` に `todo complete`/`todo reopen`/`todo list --all-active` の契約テストを追加する
+- [X] T019 [P] [US2] `tests/integration/test_cli_workflows.py` に完了化→未完了化の統合テストを追加する
+- [X] T020 [P] [US2] `tests/unit/test_repository.py` に未存在ID・不正IDの更新失敗テストを追加する
 
 ### Implementation for User Story 2
 
-- [ ] T021 [US2] `src/todo_cli/repository.py` に完了化・未完了化・未アーカイブ全件取得を実装する
-- [ ] T022 [US2] `src/todo_cli/app.py` に `complete_task`, `reopen_task`, `list_all_active_tasks` ユースケースを実装する
-- [ ] T023 [US2] `src/todo_cli/cli.py` に `todo complete`, `todo reopen`, `todo list --all-active` を実装する
-- [ ] T024 [US2] `src/todo_cli/cli.py` にID不正/未存在時の終了コード `2` とエラーメッセージ処理を実装する
+- [X] T021 [US2] `src/todo_cli/repository.py` に完了化・未完了化・未アーカイブ全件取得を実装する
+- [X] T022 [US2] `src/todo_cli/app.py` に `complete_task`, `reopen_task`, `list_all_active_tasks` ユースケースを実装する
+- [X] T023 [US2] `src/todo_cli/cli.py` に `todo complete`, `todo reopen`, `todo list --all-active` を実装する
+- [X] T024 [US2] `src/todo_cli/cli.py` にID不正/未存在時の終了コード `2` とエラーメッセージ処理を実装する
 
 **Checkpoint**: User Story 2 がUser Story 1に依存せず独立検証可能
 
@@ -94,16 +94,16 @@
 
 ### Tests for User Story 3
 
-- [ ] T025 [P] [US3] `tests/contract/test_cli_contract.py` に `todo archive`/`todo restore` の契約テストを追加する
-- [ ] T026 [P] [US3] `tests/integration/test_cli_workflows.py` にアーカイブ非表示・復元再表示の統合テストを追加する
-- [ ] T027 [P] [US3] `tests/unit/test_repository.py` に再アーカイブ失敗と非アーカイブ復元失敗の単体テストを追加する
+- [X] T025 [P] [US3] `tests/contract/test_cli_contract.py` に `todo archive`/`todo restore` の契約テストを追加する
+- [X] T026 [P] [US3] `tests/integration/test_cli_workflows.py` にアーカイブ非表示・復元再表示の統合テストを追加する
+- [X] T027 [P] [US3] `tests/unit/test_repository.py` に再アーカイブ失敗と非アーカイブ復元失敗の単体テストを追加する
 
 ### Implementation for User Story 3
 
-- [ ] T028 [US3] `src/todo_cli/repository.py` にアーカイブ/復元状態遷移（復元時は常に未完了）を実装する
-- [ ] T029 [US3] `src/todo_cli/app.py` に `archive_task` と `restore_task` ユースケースを実装する
-- [ ] T030 [US3] `src/todo_cli/cli.py` に `todo archive` と `todo restore` コマンドを実装する
-- [ ] T031 [US3] `src/todo_cli/models.py` に復元時完了状態リセットのドメイン制約を実装する
+- [X] T028 [US3] `src/todo_cli/repository.py` にアーカイブ/復元状態遷移（復元時は常に未完了）を実装する
+- [X] T029 [US3] `src/todo_cli/app.py` に `archive_task` と `restore_task` ユースケースを実装する
+- [X] T030 [US3] `src/todo_cli/cli.py` に `todo archive` と `todo restore` コマンドを実装する
+- [X] T031 [US3] `src/todo_cli/models.py` に復元時完了状態リセットのドメイン制約を実装する
 
 **Checkpoint**: 全ユーザーストーリーが独立して動作し、状態遷移要件を満たす
 
@@ -113,10 +113,10 @@
 
 **Purpose**: 横断品質（型安全性・カバレッジ・ドキュメント）を仕上げる
 
-- [ ] T032 [P] `tests/unit/test_models.py` と `tests/unit/test_repository.py` に境界条件テストを追加しカバレッジ90%以上を達成する
-- [ ] T033 `src/todo_cli/models.py`, `src/todo_cli/app.py`, `src/todo_cli/repository.py`, `src/todo_cli/cli.py` の型注釈を補完して `mypy` エラーを解消する
-- [ ] T034 [P] `specs/001-cli-todo-app/quickstart.md` に最終コマンドと検証手順を反映する
-- [ ] T035 `pyproject.toml` に `uv run pytest --cov=src --cov-report=term-missing --cov-fail-under=90` と `uv run mypy src tests` の品質ゲート実行手順を明記する
+- [X] T032 [P] `tests/unit/test_models.py` と `tests/unit/test_repository.py` に境界条件テストを追加しカバレッジ90%以上を達成する
+- [X] T033 `src/todo_cli/models.py`, `src/todo_cli/app.py`, `src/todo_cli/repository.py`, `src/todo_cli/cli.py` の型注釈を補完して `mypy` エラーを解消する
+- [X] T034 [P] `specs/001-cli-todo-app/quickstart.md` に最終コマンドと検証手順を反映する
+- [X] T035 `pyproject.toml` に `uv run pytest --cov=src --cov-report=term-missing --cov-fail-under=90` と `uv run mypy src tests` の品質ゲート実行手順を明記する
 
 ---
 
