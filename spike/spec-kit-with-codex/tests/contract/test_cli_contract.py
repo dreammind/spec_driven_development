@@ -88,3 +88,45 @@ def test_archive_restore_contract(tmp_path: Path, capsys: CaptureFixture[str]) -
     assert run(["--storage", str(storage), "list"] ) == 0
     out = capsys.readouterr().out
     assert "completed=False" in out
+
+
+def test_edit_contract_success(tmp_path: Path, capsys: CaptureFixture[str]) -> None:
+    storage = tmp_path / "tasks.json"
+    assert run(["--storage", str(storage), "add", "--title", "old"]) == 0
+    task_id = _extract_id(capsys.readouterr().out)
+
+    code = run(["--storage", str(storage), "edit", "--id", task_id, "--title", "new"])
+    assert code == 0
+    out = capsys.readouterr().out
+    assert "edited:" in out
+    assert "new" in out
+
+
+def test_edit_contract_failures_return_code_2(
+    tmp_path: Path, capsys: CaptureFixture[str]
+) -> None:
+    storage = tmp_path / "tasks.json"
+    assert run(["--storage", str(storage), "add", "--title", "task"]) == 0
+    task_id = _extract_id(capsys.readouterr().out)
+
+    assert run(["--storage", str(storage), "archive", "--id", task_id]) == 0
+    capsys.readouterr()
+
+    cases = [
+        ["--storage", str(storage), "edit", "--id", "bad-id", "--title", "x"],
+        ["--storage", str(storage), "edit", "--id", task_id, "--title", "   "],
+        ["--storage", str(storage), "edit", "--id", task_id, "--title", "x" * 256],
+        [
+            "--storage",
+            str(storage),
+            "edit",
+            "--id",
+            "cb5f4da4-8ba6-4ce9-9b58-849534f4f5d3",
+            "--title",
+            "x",
+        ],
+        ["--storage", str(storage), "edit", "--id", task_id, "--title", "x"],
+    ]
+    for argv in cases:
+        code = run(argv)
+        assert code == 2

@@ -74,6 +74,13 @@ tests/
 
 **Structure Decision**: 既存単一CLIプロジェクト構成を維持。編集機能は `repository`（永続化更新）→`app`（ユースケース）→`cli`（入力契約）の順で追加し、既存テスト群に編集シナリオを増分する。
 
+## CLI Contract Alignment
+
+- `contracts/cli-edit-contract.md` の `todo edit --id <uuid> --title <text>` に合わせて `src/todo_cli/cli.py` に `edit` サブコマンドを追加。
+- 正常系は終了コード `0` と `edited: <id> | <title>` 出力に統一。
+- 契約違反（不正ID、空白タイトル、255文字超過、未存在ID、アーカイブ済み編集）は終了コード `2` に統一。
+- 編集成功時は `title` のみ更新し、`id/is_completed/is_archived/created_at` の不変条件を `app/repository` で保証。
+
 ## Complexity Tracking
 
 現時点で憲章違反に該当する複雑化はなし。

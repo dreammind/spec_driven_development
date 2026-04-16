@@ -6,7 +6,7 @@ from uuid import uuid4
 import pytest
 from pydantic import ValidationError
 
-from todo_cli.models import Task
+from todo_cli.models import TASK_TITLE_MAX_LENGTH, Task
 
 
 def test_task_title_trimmed_and_valid() -> None:
@@ -17,6 +17,11 @@ def test_task_title_trimmed_and_valid() -> None:
 def test_task_empty_title_rejected() -> None:
     with pytest.raises(ValidationError):
         Task(id=uuid4(), title="   ")
+
+
+def test_task_too_long_title_rejected() -> None:
+    with pytest.raises(ValidationError):
+        Task(id=uuid4(), title="x" * (TASK_TITLE_MAX_LENGTH + 1))
 
 
 def test_task_restore_resets_completion() -> None:

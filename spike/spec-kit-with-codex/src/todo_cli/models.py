@@ -5,6 +5,8 @@ from uuid import UUID
 
 from pydantic import BaseModel, Field, field_validator
 
+TASK_TITLE_MAX_LENGTH = 255
+
 
 class Task(BaseModel):
     id: UUID
@@ -16,9 +18,15 @@ class Task(BaseModel):
     @field_validator("title")
     @classmethod
     def validate_title(cls, value: str) -> str:
+        return cls.normalize_title(value)
+
+    @staticmethod
+    def normalize_title(value: str) -> str:
         title = value.strip()
         if not title:
             raise ValueError("title must not be empty")
+        if len(title) > TASK_TITLE_MAX_LENGTH:
+            raise ValueError(f"title must be at most {TASK_TITLE_MAX_LENGTH} characters")
         return title
 
     def complete(self) -> "Task":

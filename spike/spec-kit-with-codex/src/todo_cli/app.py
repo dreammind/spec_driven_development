@@ -27,3 +27,6 @@ class TodoApp:
 
     def restore_task(self, task_id: str) -> Task:
         return self.repo.restore_task(task_id=task_id)
+
+    def edit_task_title(self, task_id: str, new_title: str) -> Task:
+        return self.repo.edit_task_title(task_id=task_id, new_title=new_title)

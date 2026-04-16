@@ -71,6 +71,11 @@ specs/001-cli-todo-app
 ## /speckit.implement で実装
 
 * `specs/001-cli-todo-app/tasks.md`に沿って実装が進む。完了した時にチェックが入る
+* CLIの実行は `python -m` なしで `uv run todo ...` を使えるようにした
+```bash
+uv run todo list
+uv run todo add --title "牛乳を買う"
+```
 
 ## ステップ2に進む
 

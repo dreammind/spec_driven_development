@@ -10,8 +10,8 @@
 
 **Purpose**: 編集機能追加の前提を整える
 
-- [ ] T001 `pyproject.toml` の開発依存（pytest-cov, mypy）と `mypy.ini` の設定を確認し、不足があれば更新する
-- [ ] T002 `specs/002-edit-task-title/contracts/cli-edit-contract.md` と `src/todo_cli/cli.py` の現行CLI差分を洗い出し、対応方針を `specs/002-edit-task-title/plan.md` に追記する
+- [X] T001 `pyproject.toml` の開発依存（pytest-cov, mypy）と `mypy.ini` の設定を確認し、不足があれば更新する
+- [X] T002 `specs/002-edit-task-title/contracts/cli-edit-contract.md` と `src/todo_cli/cli.py` の現行CLI差分を洗い出し、対応方針を `specs/002-edit-task-title/plan.md` に追記する
 
 ---
 
@@ -21,10 +21,10 @@
 
 **⚠️ CRITICAL**: このフェーズ完了までユーザーストーリー作業を開始しない
 
-- [ ] T003 `src/todo_cli/models.py` にタイトル編集用バリデーション（trim後1〜255文字）と共通定数を追加する
-- [ ] T004 [P] `src/todo_cli/repository.py` にタイトル更新の永続化処理（対象ID探索、アーカイブ済み拒否、失敗時非更新）を追加する
-- [ ] T005 [P] `src/todo_cli/app.py` に編集ユースケースとドメインエラー（未存在・不正入力・編集不可）を追加する
-- [ ] T006 `src/todo_cli/cli.py` に `edit` サブコマンドの骨格（引数受理とアプリ呼び出し）を追加する
+- [X] T003 `src/todo_cli/models.py` にタイトル編集用バリデーション（trim後1〜255文字）と共通定数を追加する
+- [X] T004 [P] `src/todo_cli/repository.py` にタイトル更新の永続化処理（対象ID探索、アーカイブ済み拒否、失敗時非更新）を追加する
+- [X] T005 [P] `src/todo_cli/app.py` に編集ユースケースとドメインエラー（未存在・不正入力・編集不可）を追加する
+- [X] T006 `src/todo_cli/cli.py` に `edit` サブコマンドの骨格（引数受理とアプリ呼び出し）を追加する
 
 **Checkpoint**: 編集機能の土台が揃い、各ストーリーのテスト駆動実装を開始できる
 
@@ -38,13 +38,13 @@
 
 ### Tests for User Story 1
 
-- [ ] T007 [P] [US1] `tests/contract/test_cli_contract.py` に `todo edit` 成功時の契約テスト（終了コード0、成功メッセージ）を追加する
-- [ ] T008 [P] [US1] `tests/integration/test_cli_workflows.py` に単一タスク編集の統合テスト（他タスク不変を含む）を追加する
+- [X] T007 [P] [US1] `tests/contract/test_cli_contract.py` に `todo edit` 成功時の契約テスト（終了コード0、成功メッセージ）を追加する
+- [X] T008 [P] [US1] `tests/integration/test_cli_workflows.py` に単一タスク編集の統合テスト（他タスク不変を含む）を追加する
 
 ### Implementation for User Story 1
 
-- [ ] T009 [US1] `src/todo_cli/cli.py` に `todo edit --id --title` の引数処理と成功出力を実装する
-- [ ] T010 [US1] `src/todo_cli/app.py` と `src/todo_cli/repository.py` でタイトルのみ更新し、`id/is_completed/is_archived/created_at` を不変に保つ処理を実装する
+- [X] T009 [US1] `src/todo_cli/cli.py` に `todo edit --id --title` の引数処理と成功出力を実装する
+- [X] T010 [US1] `src/todo_cli/app.py` と `src/todo_cli/repository.py` でタイトルのみ更新し、`id/is_completed/is_archived/created_at` を不変に保つ処理を実装する
 
 **Checkpoint**: US1 単体で編集成功フローが動作し、受け入れシナリオ1・2を満たす
 
@@ -58,12 +58,12 @@
 
 ### Tests for User Story 2
 
-- [ ] T011 [P] [US2] `tests/integration/test_cli_workflows.py` に編集後一覧確認と再起動後保持の統合テストを追加する
+- [X] T011 [P] [US2] `tests/integration/test_cli_workflows.py` に編集後一覧確認と再起動後保持の統合テストを追加する
 
 ### Implementation for User Story 2
 
-- [ ] T012 [US2] `src/todo_cli/repository.py` に編集結果の保存・再読込でタイトルが保持されることを保証する処理を実装する
-- [ ] T013 [US2] `src/todo_cli/cli.py` の一覧表示出力で編集後タイトルと既存完了状態が正しく見えることを保証する
+- [X] T012 [US2] `src/todo_cli/repository.py` に編集結果の保存・再読込でタイトルが保持されることを保証する処理を実装する
+- [X] T013 [US2] `src/todo_cli/cli.py` の一覧表示出力で編集後タイトルと既存完了状態が正しく見えることを保証する
 
 **Checkpoint**: US2 単体で「編集→確認」が完了し、SC-001/SC-002の機能要件を満たす
 
@@ -77,15 +77,15 @@
 
 ### Tests for User Story 3
 
-- [ ] T014 [P] [US3] `tests/contract/test_cli_contract.py` に失敗系契約テスト（不正ID/空白/255文字超過/未存在/アーカイブ済み）を追加する
-- [ ] T015 [P] [US3] `tests/integration/test_cli_workflows.py` に失敗時データ不変を検証する統合テストを追加する
-- [ ] T016 [P] [US3] `tests/unit/test_models.py` にタイトルtrim・長さ制約のユニットテストを追加する
-- [ ] T017 [P] [US3] `tests/unit/test_repository.py` にアーカイブ済み拒否と未存在ID時非更新のユニットテストを追加する
+- [X] T014 [P] [US3] `tests/contract/test_cli_contract.py` に失敗系契約テスト（不正ID/空白/255文字超過/未存在/アーカイブ済み）を追加する
+- [X] T015 [P] [US3] `tests/integration/test_cli_workflows.py` に失敗時データ不変を検証する統合テストを追加する
+- [X] T016 [P] [US3] `tests/unit/test_models.py` にタイトルtrim・長さ制約のユニットテストを追加する
+- [X] T017 [P] [US3] `tests/unit/test_repository.py` にアーカイブ済み拒否と未存在ID時非更新のユニットテストを追加する
 
 ### Implementation for User Story 3
 
-- [ ] T018 [US3] `src/todo_cli/models.py` と `src/todo_cli/app.py` に入力検証・エラー分類を実装する
-- [ ] T019 [US3] `src/todo_cli/cli.py` に失敗時の人間可読エラー出力と終了コード2へのマッピングを実装する
+- [X] T018 [US3] `src/todo_cli/models.py` と `src/todo_cli/app.py` に入力検証・エラー分類を実装する
+- [X] T019 [US3] `src/todo_cli/cli.py` に失敗時の人間可読エラー出力と終了コード2へのマッピングを実装する
 
 **Checkpoint**: US3 単体で全不正ケースが安全に拒否され、SC-003 を満たす
 
@@ -95,10 +95,10 @@
 
 **Purpose**: 品質ゲートとドキュメント整合を最終確認する
 
-- [ ] T020 `specs/002-edit-task-title/quickstart.md` の手順で `uv run pytest -q` を実行し、必要に応じて関連テストファイルを修正する
-- [ ] T021 `specs/002-edit-task-title/quickstart.md` の手順で `uv run pytest --cov=src --cov-report=term-missing --cov-fail-under=90` を実行し、カバレッジ不足分を `tests/` 配下に追加する
-- [ ] T022 `specs/002-edit-task-title/quickstart.md` の手順で `uv run mypy src tests` を実行し、型エラーを `src/todo_cli/*.py` と `tests/**/*.py` で解消する
-- [ ] T023 `specs/002-edit-task-title/spec.md` と `specs/002-edit-task-title/quickstart.md` を更新し、最終受け入れ結果（US1-US3）を反映する
+- [X] T020 `specs/002-edit-task-title/quickstart.md` の手順で `uv run pytest -q` を実行し、必要に応じて関連テストファイルを修正する
+- [X] T021 `specs/002-edit-task-title/quickstart.md` の手順で `uv run pytest --cov=src --cov-report=term-missing --cov-fail-under=90` を実行し、カバレッジ不足分を `tests/` 配下に追加する
+- [X] T022 `specs/002-edit-task-title/quickstart.md` の手順で `uv run mypy src tests` を実行し、型エラーを `src/todo_cli/*.py` と `tests/**/*.py` で解消する
+- [X] T023 `specs/002-edit-task-title/spec.md` と `specs/002-edit-task-title/quickstart.md` を更新し、最終受け入れ結果（US1-US3）を反映する
 
 ---
 
