@@ -40,7 +40,7 @@ auto_commit:
     enabled: false
     message: "[Spec Kit] 仕様を追加"
   after_clarify:
-    enabled: false
+    enabled: true
     message: "[Spec Kit] 仕様を明確化"
   after_plan:
     enabled: false

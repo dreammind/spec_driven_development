@@ -22,8 +22,12 @@ $ specify init . --ai codex --ai-skills
 
 ## 開発のお試し
 
+基本的な流れは、constitution → specify → clarify → plan → tasks → implement
+
 ### /speckit.constitution で開発原則を決める
 
 * vscode + codex extension の画面を開いて/speckit.constitution を選択し、リターンキーを押す
 * そうすると、`./specify/memory/constitution.md` が自動生成される
 *  `constitution.md` にTDDなどの原則を追記する
+
+### /speckit.specify で仕様を決める
